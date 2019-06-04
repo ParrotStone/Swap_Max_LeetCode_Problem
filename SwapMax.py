@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# # First version
-
 
 class Solution:
     def maximum_swap(self, num: int) -> int:
@@ -9,9 +7,14 @@ class Solution:
         swapped = False
         i = 0
         while not swapped and i < len(digit_list):
-            mx_index = digit_list.index(max(digit_list[i:]), i)
-            if digit_list[i] < digit_list[mx_index]:
-                digit_list[i], digit_list[mx_index] = digit_list[mx_index], digit_list[i]
+            rmx_index = str(num).rfind(max(digit_list[i:]))
+            lmx_index = str(num).find(max(digit_list[i:]))
+
+            if digit_list[i] < digit_list[lmx_index]:
+                if rmx_index > lmx_index:
+                    digit_list[i], digit_list[rmx_index] = digit_list[rmx_index], digit_list[i]
+                else:
+                    digit_list[i], digit_list[lmx_index] = digit_list[lmx_index], digit_list[i]
                 swapped = True
             else:
                 i += 1
@@ -31,3 +34,5 @@ print(solution.maximum_swap(9783))  # 9873
 print(solution.maximum_swap(98368))  # 98863
 print(solution.maximum_swap(1993))  # 9913
 print(solution.maximum_swap(3991))  # 9931
+print(solution.maximum_swap(1919))  # 9911
+print(solution.maximum_swap(1191989))  # 9191981
